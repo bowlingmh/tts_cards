@@ -5,7 +5,7 @@ import flask
 app = flask.Flask(__name__)
 
 def draw_text(img, text, textcolor, fontsize, padding=50):
-    font = ImageFont.truetype('/Library/Fonts/Arial.ttf', fontsize)
+    font = ImageFont.truetype('./fonts/Arial.ttf', fontsize)
     draw = ImageDraw.Draw(img)
 
     lines = text.split('\n')
@@ -16,7 +16,6 @@ def draw_text(img, text, textcolor, fontsize, padding=50):
     for i, line in enumerate(lines):
         w, h = draw.textsize(line, font=font)
         pos = ((img.width - w)//2, (img.height - height)//2 + line_height * i)
-        print(pos, textcolor, line)
         draw.text(pos,line,textcolor,font=font)
 
 @app.route('/card')
