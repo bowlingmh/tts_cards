@@ -23,7 +23,7 @@ def card():
     bgcolor = flask.request.args.get('bgcolor', 'white')
     textcolor = flask.request.args.get('textcolor', 'black')
     text = flask.request.args.get('text', '')
-    fontsize = flask.request.args.get('fontsize', 36)
+    fontsize = int(flask.request.args.get('fontsize', 36))
 
     img = Image.new('RGB', (250, 360), color=bgcolor)
     draw_text(img, text, textcolor, fontsize)
@@ -32,6 +32,10 @@ def card():
     img.save(img_io, 'PNG')
     img_io.seek(0)
     return flask.send_file(img_io, mimetype='image/jpeg')
+
+@app.route('/')
+def main():
+    return flask.render_template('main.html')
 
 if __name__ == '__main__':
     app.run()
