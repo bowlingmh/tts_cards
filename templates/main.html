@@ -21,6 +21,10 @@
   <label>Font Size</label>
 </div>
 <div>
+  <input type="checkbox" id="landscape" name="landscape">
+  <label>Landscape</label>
+</div>
+<div>
 <textarea id="text" name="text" value="" placeholder="Card Text" rows="8" cols="36">
 </textarea>
 </div>
@@ -50,6 +54,7 @@ opts = "bgcolor=" + encodeURIComponent($("#bgcolor").val());
 opts += "&textcolor=" + encodeURIComponent($("#textcolor").val());
 opts += "&fontsize=" + encodeURIComponent($("#fontsize").val());
 opts += "&text=" + encodeURIComponent($("#text").val());
+opts += "&landscape=" + encodeURIComponent($("#landscape").prop('checked'));
 return opts;
 }
 

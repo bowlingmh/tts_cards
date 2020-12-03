@@ -24,9 +24,12 @@ def card():
     textcolor = flask.request.args.get('textcolor', 'black')
     text = flask.request.args.get('text', '')
     fontsize = int(flask.request.args.get('fontsize', 36))
+    landscape = flask.request.args.get('landscape', 'false') in ('true', 1)
 
-    img = Image.new('RGB', (250, 360), color=bgcolor)
-    draw_text(img, text, textcolor, fontsize)
+    img = Image.new('RGB', (360, 250) if landscape else (250, 360), color=bgcolor)
+    draw_text(img, text, textcolor, fontsize, landscape)
+    if landscape:
+        img = img.rotate(90, expand=True)
 
     img_io = io.BytesIO()
     img.save(img_io, 'PNG')
