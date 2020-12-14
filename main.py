@@ -4,6 +4,13 @@ import flask
 
 app = flask.Flask(__name__)
 
+@app.before_request
+def before_request():
+    if flask.request.url.startswith('http://'):
+        url = flask.request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)
+
 def draw_text(img, text, textcolor, fontsize, padding=50):
     font = ImageFont.truetype('./fonts/Arial.ttf', fontsize)
     draw = ImageDraw.Draw(img)
